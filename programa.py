@@ -223,6 +223,25 @@ def editProd():
         apagarTela()
         subMenuEstoque()
 
+#função responsável por apagar produtos do bd
+def delProd():
+        print('''
+      ----------------------------------------------------
+              ADEGA GOMES DISTRIBUIDORA DE BEBIDAS
+      ----------------------------------------------------
+                      + ALTERAÇÕES +
+        ''')
+        delet = 16
+
+        c.execute('''
+        DELETE FROM produtos;
+        WHERE id = ?
+        ''', (delet))
+
+        conn.commit()
+
+        print('Apagado com sucesso!')
+
 #função sub menu estoque
 def subMenuEstoque():
     opc_estoque = input('''
@@ -245,6 +264,9 @@ def subMenuEstoque():
     elif opc_estoque == '3':
         apagarTela()
         editProd()
+    elif opc_estoque == '4':
+        apagarTela()
+        delProd()
     else:
         apagarTela()
         menuInicial()

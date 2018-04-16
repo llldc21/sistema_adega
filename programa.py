@@ -249,6 +249,32 @@ def subMenuEstoque():
         apagarTela()
         menuInicial()
 
+#função sub menu clientes
+def subMenuClientes():
+    opc_estoque = input('''
+  ----------------------------------------------------
+          ADEGA GOMES DISTRIBUIDORA DE BEBIDAS
+  ----------------------------------------------------
+                   * MENU CLIENTES *
+
+       1 - Cadastro / 2 - Consulta / 3 - Alterações
+
+       4 - Exclusão                  0 - Voltar
+
+   Escolha uma opção para continuar: ''')
+    if opc_estoque == '1':
+        apagarTela()
+        inserirCliente()
+    elif opc_estoque == '2':
+        apagarTela()
+        consultCliente()
+    elif opc_estoque == '3':
+        apagarTela()
+        editCliente()
+    else:
+        apagarTela()
+        menuInicial()
+
 #criando menu inicial
 def menuInicial():
     opc_inicial = input('''

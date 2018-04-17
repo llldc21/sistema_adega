@@ -28,21 +28,21 @@ def criandoTB():
 #função responsável por inserir os produtos na tabela
 def inserirProd():
     print('''
- ----------------------------------------------------
-         ADEGA GOMES DISTRIBUIDORA DE BEBIDAS
- ----------------------------------------------------
-                  + CADASTRO +
+  ----------------------------------------------------
+          ADEGA GOMES DISTRIBUIDORA DE BEBIDAS
+  ----------------------------------------------------
+                   + CADASTRO +
     ''')
-    p_nome = input('NOME DO PRODUTO: ')
-    p_qnt = input('QUANTIDADE DO PRODUTO: ')
-    p_vlrCompra = input('VALOR DE COMPRA: R$ ')
-    p_vlrVenda = input('VALOR DE VENDA: R$ ')
-    p_grupo = input('GRUPO: ')
+    p_nome = input('  NOME DO PRODUTO: ')
+    p_qnt = input('  QUANTIDADE DO PRODUTO: ')
+    p_vlrCompra = input('  VALOR DE COMPRA: R$ ')
+    p_vlrVenda = input('  VALOR DE VENDA: R$ ')
+    p_grupo = input('  GRUPO: ')
 
     inserir = input('''
                CONFIRA OS DADOS
     PRESSIONE 1 PARA ENVIAR OU 2 PARA CANCELAR!
-    ''')
+                        ''')
     if inserir == '1':
         criandoTB() #chamando a abertura da tabela, para reconhecimento
 
@@ -55,10 +55,10 @@ def inserirProd():
         #enviando respostas
         conn.commit()
         print('''
-        * Dados inseridos com sucesso! *
+         * Dados inseridos com sucesso! *
         ''')
 
-        opc_cad = input('Deseja continuar cadastrando (S/N)?')
+        opc_cad = input('  Deseja continuar cadastrando (S/N)?')
         if opc_cad == 'S' or opc_cad == 's':
             apagarTela()
             inserirProd()
@@ -66,7 +66,7 @@ def inserirProd():
             apagarTela()
             subMenuEstoque()
     else:
-        input('Cadastro cancelado, pressione ENTER para voltar ao menu anterior.')
+        input('  Cadastro cancelado, pressione ENTER para voltar ao menu anterior.')
         apagarTela()
         subMenuEstoque()
 
@@ -225,22 +225,50 @@ def editProd():
 
 #função responsável por apagar produtos do bd
 def delProd():
-        print('''
-      ----------------------------------------------------
-              ADEGA GOMES DISTRIBUIDORA DE BEBIDAS
-      ----------------------------------------------------
-                      + ALTERAÇÕES +
-        ''')
-        delet = 16
+    print('''
+  ----------------------------------------------------
+          ADEGA GOMES DISTRIBUIDORA DE BEBIDAS
+  ----------------------------------------------------
+                     + EXCLUSÃO +
+    ''')
 
-        c.execute('''
-        DELETE FROM produtos;
-        WHERE id = ?
-        ''', (delet))
+    criandoTB() #chamando o bd
 
+    #listando os produtos que estão no bd
+    c.execute('''
+    SELECT * FROM produtos;
+    ''')
+    print("""
+  (ID, 'Nome','Quantidade', 'Valor compra', 'Valor venda', 'Grupo')
+    """)
+    for linha in c.fetchall():
+        print(' ',linha)
+
+    #pedindo o ID a ser excluido
+    print('')
+    del_id = input('  Digite o ID do produto que deseja apagar: ')
+
+    #realizando a exclusão de acordo com os parametros informados pelo usuario
+    c.execute('''
+    DELETE FROM produtos
+    WHERE id = ?
+    ''',(del_id,))
+
+    confir = input('  Confirma essa exclusão (S/N)? ')
+    if confir == 'S' or confir == 's':
         conn.commit()
+        input('  Apagado com sucesso!')
+    else:
+        apagarTela()
+        subMenuEstoque()
 
-        print('Apagado com sucesso!')
+    v_menu = input('  Deseja continuar excluindo (S/N)? ')
+    if v_menu == 'S' or v_menu == 's':
+        apagarTela()
+        delProd()
+    else:
+        apagarTela()
+        subMenuEstoque()
 
 #função sub menu estoque
 def subMenuEstoque():

@@ -22,7 +22,8 @@ def criandoTB():
         vlr_compra TEXT NOT NULL,
         vlr_venda TEXT NOT NULL,
         grupo TEXT NOT NULL
-    )''')
+    )
+''')
 
 #função responsável por inserir os produtos na tabela
 def inserirProd():

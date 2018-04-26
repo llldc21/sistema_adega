@@ -12,6 +12,8 @@ conn = sqlite3.connect('produtos.db')
 #cursor, responsável pela execução dos comandos
 c = conn.cursor()
 
+
+
 #criando a tabela do bd
 def criandoTB():
     c.execute('''
